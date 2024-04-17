@@ -33,7 +33,7 @@ export default function MenuAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Abode Test
+            Meeting Booking system
           </Typography>
           {token && (
             <div>
