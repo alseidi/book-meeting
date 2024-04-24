@@ -11,7 +11,7 @@ This repository houses the frontend component of a meeting booking system design
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 ## Setting Up Environment Variables
 - **Copy .env.example**: Duplicate the .env.example file in the root of your project.
@@ -23,7 +23,7 @@ $ npm install
 
 ```bash
 # development
-$ npm run dev
+$ yarn dev
 
 ```
 ## Design Choices and Future Considerations
