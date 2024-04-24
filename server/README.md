@@ -10,7 +10,7 @@ This repository hosts the backend component of a meeting booking system designed
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 ## Setting Up Environment Variables
 - **Copy .env.example**: Duplicate the .env.example file in the root of your project.
@@ -22,13 +22,13 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 ## Design Choices and Future Considerations
 
