@@ -45,6 +45,7 @@ const SignUp = () => {
         email: values.email,
         password: values.password
       }
+
       try{
         const {access_token} = await apiService.post<SignInResponse>('auth/signup', body, {}, true)
         updateToken(access_token)

@@ -11,5 +11,6 @@ async function bootstrap() {
   app.enableCors();
 
   await app.listen(3000);
+  console.info("Server is running at port 3000");
 }
 bootstrap();
