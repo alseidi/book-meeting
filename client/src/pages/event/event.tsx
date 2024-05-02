@@ -5,19 +5,24 @@ import { useEffect, useState } from "react";
 import { apiService } from "../../utils/api";
 import { Link, useNavigate } from "react-router-dom";
 
-function IndexPage() {
+function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const events = await apiService.get<Event[]>("event");
-      setEvents(events);
-      setLoading(false);
-    };
-    fetchData();
+    try {
+      const fetchData = async () => {
+        setLoading(true);
+        const events = await apiService.get<Event[]>("event");
+        setEvents(events);
+        setLoading(false);
+      };
+      fetchData();
+      
+    } catch (error) {
+      console.error(error)
+    }
   }, []);
 
   const onEventDelete = async (id: string) => {
@@ -50,4 +55,4 @@ function IndexPage() {
   );
 }
 
-export default IndexPage;
+export default EventsPage;

@@ -1,6 +1,6 @@
 import RootLayout from "../layouts/rootLayout/RootLayout";
 import CreateEventPage from "../pages/createEvent/CreateEvent";
-import IndexPage from "../pages/event/event";
+import EventsPage from "../pages/event/event";
 import SignIn from "../pages/signin/Singin";
 import SignUp from "../pages/singup/Singup";
 import Private from "../components/routes/Private";
@@ -31,7 +31,7 @@ const routes = [
         children: [
           {
             index: true,
-            element: <IndexPage />,
+            element: <EventsPage />,
           },
           {
             path: "create-event-page",
