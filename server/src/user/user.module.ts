@@ -13,7 +13,6 @@ import { AuthService } from 'src/auth/auth.service';
   controllers: [UserController],
   imports: [
     JwtModule.register({
-      secret: 'your-secret-key',
       signOptions: { expiresIn: '1y' },
     }),
     MongooseModule.forFeature([{ name: UserModel.name, schema: UserSchema }]),

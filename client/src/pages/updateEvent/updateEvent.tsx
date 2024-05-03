@@ -36,7 +36,6 @@ const UpdateEventPage = () => {
       attendees: values.attendees,
     };
 
-    console.log("reqBody",reqBody)
     try {
       await apiService.put(`event/${id}`, reqBody);
       navigate("/");

@@ -69,7 +69,7 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials');
     }
     const payload = { email: user.email, id: user._id };
-    const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '10d' });
+    const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '10d', secret: process.env.JWT_SECRET }); // TODO: secret key should receive from Auth Module
     return {
       access_token: accessToken,
     };
@@ -80,15 +80,14 @@ export class AuthService {
    * @param signupDto - The signup data.
    * @returns - A promise that resolves to an object containing the access token.
    */
-  async signup(signupDto: SignupDto): Promise<LoginResponse> {
+  async signup(signupDto: SignupDto): Promise<User> {
     const { email, password } = signupDto;
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     try {
-      await this.userService.createUser(email, hashedPassword);
+      return this.userService.createUser(email, hashedPassword);
 
-      return this.login({ email, password });
     } catch (error) {
       throw new BadRequestException(error.message);
     }
