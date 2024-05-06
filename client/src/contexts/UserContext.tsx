@@ -2,8 +2,6 @@ import  { createContext, useState, useContext, ReactNode, useEffect } from "reac
 import { apiService } from "../utils/api";
 import { Attendee } from "../components/eventCard/eventCard.interface";
 
-
-
 interface UserContextType {
   token: string | null;
   updateToken: (newToken: string | null) => void;
@@ -16,25 +14,26 @@ const UserContext = createContext<UserContextType>({
   user: null
 });
 
-export const UserProvider = ({ children }:{ children: ReactNode }) => {
+interface UserProviderProps {
+  children: ReactNode;
+}
+
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
-
   const [user, setUser] = useState<Attendee | null>(null)
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-       const fetchedUser =  await apiService.get('me')
-       setUser(fetchedUser)
+      if (token) {
+        const fetchedUser =  await apiService.get('me');
+        setUser(fetchedUser);
+      }
     }
 
-    token && fetchUserInfo()
-
+    fetchUserInfo();
   },[token])
-
-
-
 
   const updateToken = (newToken: string | null) => {
     setToken(newToken);
