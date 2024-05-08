@@ -1,4 +1,5 @@
 import  { createContext, useState, useContext, ReactNode, useEffect } from "react";
+import Cookies from "js-cookie";
 import { apiService } from "../utils/api";
 import { Attendee } from "../components/eventCard/eventCard.interface";
 
@@ -19,8 +20,9 @@ interface UserProviderProps {
 }
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+  const authToken = Cookies.get('bm-token');
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("token")
+    authToken ?? null
   );
   const [user, setUser] = useState<Attendee | null>(null)
 
@@ -33,14 +35,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     fetchUserInfo();
-  },[token])
+  },[token]);
 
   const updateToken = (newToken: string | null) => {
     setToken(newToken);
     if (newToken) {
-      localStorage.setItem("token", newToken);
+      Cookies.set('bm-token', newToken, { expires: 7, path: '', secure: true });
     } else {
-      localStorage.removeItem("token");
+      Cookies.remove('bm-token');
     }
   };
 

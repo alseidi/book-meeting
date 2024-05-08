@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import {API_BASE_URL} from '../constant'
 
 type Headers = Record<string, string>;
@@ -74,7 +75,7 @@ export const apiService = {
 } as const;
 
 function addAuthorizationHeader(headers: Headers): Headers {
-  const accessToken =  localStorage.getItem("token");
+  const accessToken =  Cookies.get('bm-token');
   if (accessToken) {
     return {
       ...headers,
